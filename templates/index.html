@@ -3,33 +3,37 @@
 {% block head %} Python wih Flask{% endblock %}
 
 {% block body %} 
-<div class="content" style="align-content: center">
+<div class="content" style="align-content: center" style="width:100%;>
     <h1 style="text-align: center">Task master</h1>
     {% if tasks|length < 1  %}
     <h4 style="text-align: center"></h4> There are no tasks. Create one below!</h4>
     {%else%}
     <div class="form">
-        <table border='0', cellpadding ='55'>
-            <tr>
-                <th>Task</th>
+        <table border='0', cellpadding ='1' width="100%">
+            <tr bgcolor="#554499">
+                <th>Task ID</th>
+                <th>Task Description</th>
                 <th>Added</th>
-                <th>Actions</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             {% for task in tasks %}
-                <tr>
+                <tr height=20>
+                    <td>{{ task.id }}</td>                        
                     <td>{{ task.content }}</td>
                     <td>{{ task.date_created.date() }}</td>
-                    <td>
-                        <a href="/delete/{{task.id}}">Delete</a>
-                        <br>
+                    <td align="center">
                         <a href="/update/{{task.id}}">Update</a>
                     </td>
-                </tr>
+                    <td  align="center>
+                        <a href="/delete/{{task.id}}">Delete</a>
+                    </td>
+               </tr>
             {% endfor %}
         </table>
     {% endif %}
     </div>
-   
+   <br><br>
     <form action="/" method="POST">
         <input type="text" name="content" id="content">
         <input type="submit" value="Add Task">
